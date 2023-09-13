@@ -27,7 +27,7 @@ if (isset($_SESSION['editUser'])) {
               
                 <?php 
                   if(isset($erroruser['emp'])) {
-                    echo "<p class='error'> " . $erroruser['emp'] ."</p>";
+                    echo "<p class='alert alert-danger' role='alert'> " . $erroruser['emp'] ."</p>";
                   }
                 ?>
 
@@ -41,7 +41,7 @@ if (isset($_SESSION['editUser'])) {
 
                 <?php
                   if(isset($erroruser['email'])) {
-                    echo "<p class='error'>" . $erroruser['email'] ."</p>";
+                    echo "<p class='alert alert-danger' role='alert'>" . $erroruser['email'] ."</p>";
                   }
                 ?>
 
@@ -54,7 +54,7 @@ if (isset($_SESSION['editUser'])) {
                  
                 <?php
                   if(isset($erroruser['name'])) {
-                    echo "<p class='error'>" . $erroruser['name'] . "</p>";
+                    echo "<p class='alert alert-danger' role='alert'>" . $erroruser['name'] . "</p>";
                   }
                 ?>
                 <div class="btn_box">

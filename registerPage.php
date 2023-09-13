@@ -31,7 +31,7 @@
                   <form class="mx-1 mx-md-4" action = "php/register.php" method="POST">
                      <?php 
                       if(isset($error['empty'])) {
-                        echo "<p class = 'error' > ". $error['empty'] ."</p>";
+                        echo "<p class='alert alert-danger' role='alert' > ". $error['empty'] ."</p>";
                       }
                     ?>
 
@@ -46,7 +46,7 @@
                       
                     <?php
                       if(isset($error['name'])){
-                        echo "<p class = 'error'> ". $error['name'] . "</p>";
+                        echo "<p class='alert alert-danger' role='alert'> ". $error['name'] . "</p>";
                       }
                     ?>
 
@@ -61,7 +61,7 @@
 
                     <?php
                       if(isset($error['email'])) {
-                        echo "<p class = 'error'> ". $error['email'] . "</p>";
+                        echo "<p class='alert alert-danger' role='alert'> ". $error['email'] . "</p>";
                       }
                     ?>
 
@@ -74,7 +74,7 @@
 
                     <?php
                       if(isset($error['password'])) {
-                        echo "<p class = 'error'> ". $error['password'] . "</p>";
+                        echo "<p class='alert alert-danger' role='alert'> ". $error['password'] . "</p>";
                       }
                     ?>
 
@@ -87,7 +87,7 @@
 
                     <?php
                       if(isset($error['confirm'])) {
-                        echo "<p class = 'error'> ".$error['confirm'] ."</p>";
+                        echo "<p class='alert alert-danger' role='alert'> ".$error['confirm'] ."</p>";
                       }
                     ?>
 

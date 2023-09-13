@@ -22,7 +22,7 @@
             
             <?php 
               if(isset($errors['emp'])) {
-                echo "<p class='error'> " . $errors['emp'] ."</p>";
+                echo "<p class='alert alert-danger' role='alert'> " . $errors['emp'] ."</p>";
               }
             ?>
 
@@ -33,7 +33,7 @@
 
             <?php 
               if(isset($errors['Title'])) {
-                echo "<p class='error'> " . $errors['Title'] ."</p>";
+                echo "<p class='alert alert-danger' role='alert'> " . $errors['Title'] ."</p>";
               }
             ?>
 
@@ -44,10 +44,10 @@
 
             <?php 
               if(isset($errors['mybody'])) {
-                echo "<p class='error'> " . $errors['mybody'] ."</p>";
+                echo "<p class='alert alert-danger' role='alert'> " . $errors['mybody'] ."</p>";
               }
             ?>
-
+            <br>
             <button type="submit" class="btn btn-info" name="submit"> Make Post </button>
           </form>
         </div>

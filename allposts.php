@@ -76,7 +76,7 @@
                     </div>
                     <?php
                       if(isset($error['emptyComment'. $post['Post_id']])) {
-                        echo '<p class="error">' . $error['emptyComment'. $post['Post_id']] . '</p>' ;
+                        echo '<p class="alert alert-danger" role="alert">' . $error['emptyComment'. $post['Post_id']] . '</p>' ;
                       }
                     ?>
                   <br>

@@ -22,7 +22,7 @@
             
                 <?php 
                   if(isset($error['empty'])) {
-                    echo "<p class='error'> " . $error['empty'] ."</p>";
+                    echo "<p class='alert alert-danger' role='alert'> " . $error['empty'] ."</p>";
                   }
                 ?>
 
@@ -36,7 +36,7 @@
 
                 <?php 
                   if(isset($error['title'])) {
-                    echo "<p class='error'> " . $error['title'] ."</p>";
+                    echo "<p class='alert alert-danger' role='alert'> " . $error['title'] ."</p>";
                   }
                 ?>
 
@@ -49,10 +49,10 @@
 
                 <?php 
                   if(isset($error['body'])) {
-                    echo "<p class='error'> " . $error['body'] ."</p>";
+                    echo "<p class='alert alert-danger' role='alert'>". $error['body']. "</p>";
                   }
                 ?>
-
+                <br>
                 <button type="submit" class="btn btn-info" name="finaledit">Edit</button>
                 <a class="btn btn-primary" href="allposts.php">Cancel</a>
             </form>
