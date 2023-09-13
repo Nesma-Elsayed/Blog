@@ -45,34 +45,19 @@
                                 if (isset($_SESSION['mycomments'])) {
                                     if (count($_SESSION['mycomments']) > 0) {
                                         foreach ($_SESSION['mycomments'] as $comment) {
-                                            echo "<p class='card-subtitle mb-2 text-muted'>" . $comment . "</p>";
+                                            echo '<span class="comment-user">'.'@'.$comment['UserName'] . '</span>';
+                                            // echo "<p class='card-subtitle mb-2 text-muted'>" . $comment['Description'] . "</p>";
+                                            ?>
+                                            <input type="text" class="form-control" name="comment" disabled value="<?php echo $comment['Description'];?>">
+                                            <?php
                                         }
                                     } else {
                                         echo "<p>No comments Yet</p>";
                                     }
                                 }
                             ?>
-
-                        </div>
-                        <div class="form_container">
-                            <form action="php/register.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="comment" class="form-label">Add Comment</label>
-                                    
-                                    <?php                                      
-                                        echo '<input type="hidden" name="post_id" value="' . $_SESSION['postViewId'] . '">';
-                                    ?>
-                                    
-                                    <input type="text" class="form-control" id="comment" name="comment">
-                                    <?php
-                                        if(isset($error['emptyComment'])) {
-                                            echo '<p class="error">' . $error['emptyComment'] . '</p>' ;
-                                        }
-                                    ?>
-                                    <br>
-                                    <button class="btn btn-primary" type="submit" name="addComment"><i class="bi bi-plus-square"></i> Add</button>
-                                </div>
-                            </form>
+                            <br>
+                            <a href="allposts.php" class="btn btn-primary">Back</a>
                         </div>
                     </div>
                 </div>

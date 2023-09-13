@@ -1,6 +1,7 @@
 <?php
     session_start();
     require('./connection.php');
+    
     function checkPasswordStrength($password) {
         // Define password strength requirements using regular expressions
         $uppercase = preg_match('@[A-Z]@', $password);
@@ -109,6 +110,7 @@
               session_start();
               $_SESSION['user'] = $email;
               $_SESSION['Id'] = $row['ID'];
+              $_SESSION['UserName'] = $row['Name'];
               header("Location: indexphp.php");
             //   header("Location: ../service.php");
               exit();
@@ -238,28 +240,32 @@
     /// view post
     if (isset($_GET['view'])) {
         $post_id = $_GET['post_id'];
-        $sql = "SELECT posts.Title, posts.Body, users.Name, comments.Description
+        $sql = "SELECT posts.Title, posts.Body, post_user.Name AS PostUserName, comments.Description, comment_user.Name AS CommentUserName
                 FROM posts
-                INNER JOIN users ON posts.UserId = users.ID 
+                INNER JOIN users AS post_user ON posts.UserId = post_user.ID
                 LEFT JOIN comments ON posts.ID = comments.PostId
+                LEFT JOIN users AS comment_user ON comments.UserId = comment_user.ID
                 WHERE posts.ID = '$post_id'";
         $view = [];
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
         $_SESSION['viewtitle'] = $row['Title'];
         $_SESSION['viewbody'] = $row['Body'];
-        $_SESSION['postUser'] = $row['Name'];
+        $_SESSION['postUser'] = $row['PostUserName'];
         $_SESSION['postViewId'] = $post_id;
-        
+    
         $comments = array();
         do {
             if (!empty($row['Description'])) {
-                $comments[] = $row['Description'];
+                $comments[] = array(
+                    'Description' => $row['Description'],
+                    'UserName' => $row['CommentUserName']
+                );
             }
         } while ($row = mysqli_fetch_assoc($result));
-
+    
         $_SESSION['mycomments'] = $comments;
-        
+    
         header("Location: ../view.php");
     }
 
@@ -269,6 +275,7 @@
         $name = $_POST['name'];
         $editUser = [];
         $allEmails = "SELECT Email FROM users";
+        @
         $result = mysqli_query($connection, $allEmails);
 
         if(empty($email) &&  empty($name) ) {
@@ -287,6 +294,7 @@
             $sql = "UPDATE users SET Email = '$email', Name = '$name' WHERE ID = '$userId'";
             if (mysqli_query($connection, $sql)) {
               $_SESSION['user'] = $email;
+              $_SESSION['UserName'] = $name;
                 header("Location: user.php");
             } else {
                 header("Location: ../index.php");
@@ -300,7 +308,7 @@
     ///add comment
     if(isset($_POST['addComment'])) {
         $post_id = $_POST['post_id'] ;
-        $comment = strip_tags(addslashes($_POST['comment']));
+        $comment = strip_tags(addslashes($_POST['comment'.$post_id]));
         $UserId = $_SESSION['Id'];
         $commentError = [];
         if(!empty($comment)) {
@@ -311,12 +319,24 @@
                header("Location: indexphp.php");
             } 
         } else {
-            $commentError['emptyComment'] = "Comment Can't be empty";   
+            $commentError['emptyComment' . $post_id] = "Comment Can't be Empty";   
             $_SESSION['commentError'] = $commentError;
-            header("Location: ../view.php");
+            header("Location: ../allposts.php");
         }
        
     }
     
+    /// delete comment
+
+    if(isset($_POST['deleteComment'])) {
+        $comment_id = $_POST['comment_id'];
+        $sql = "DELETE FROM comments WHERE ID = $comment_id";
+       if(mysqli_query($connection, $sql)) {
+        // echo '<script>alert("Invalid password. Please try again.");</script>';
+        echo '<script>alert("Comment Deleted sucessfully.");</script>';
+        echo '<script> window.location.href = "indexphp.php";</script>';
+       }
+
+    }
     mysqli_close($connection);
 ?>

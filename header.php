@@ -41,32 +41,10 @@ session_start(); // Start the session
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="css\style.css" type="text/css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-  <style>
-    .error {
-      color: red;
-      font-weight: bold;
-      border: 1px solid red;
-      background-color: rgba(255, 0, 0, 0.1);
-      padding: 5px;
-    }
-    .button-group {
-        display: inline-block;
-    }
-
-    .inline-form {
-        display: inline;
-        margin-right: 10px;
-    }
-    
-    .service_section {
-      display: flex;
-      justify-content: center; 
-      align-items: center;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css\myStyle.css" />
 </head>
 
 <body class="sub_page">
@@ -115,7 +93,7 @@ session_start(); // Start the session
                   
                 <li class="nav-item">
                 <?php if(isset($_SESSION['user'])) { ?>
-                  <a class="nav-link" href="php/user.php">  User</a>
+                  <a class="nav-link fs-5" href="php/user.php"><i class="bi bi-person-circle fs-5"></i> <?php echo $_SESSION['UserName'] ?></a>
                   <?php } ?>
                 </li>
 
@@ -124,7 +102,7 @@ session_start(); // Start the session
                     <a class="nav-link" href="login.php"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
                 <?php }
                 else {?>
-                    <a class="nav-link" href="php/logout.php"> <i class="fa fa-user" aria-hidden="true" ></i> Log Out</a>
+                    <a class="nav-link" href="php/logout.php">  Log Out</a>
 
                 <?php }
                  ?>

@@ -2,11 +2,12 @@
     session_start();
     require('./connection.php');
 
-    $sql = "SELECT posts.ID AS Post_id, users.Name, users.Email, posts.Body,
-            posts.Title, comments.Description
+    $sql = "SELECT posts.ID AS Post_id, post_user.Name as PostUserName , post_user.Email, posts.Body,
+            posts.Title, comments.Description ,comment_user.Name as CommentUser,comments.ID as comment_id
             FROM posts
-            INNER JOIN users ON users.ID = posts.UserId
+            INNER JOIN users as post_user ON post_user.ID = posts.UserId
             LEFT JOIN comments ON posts.ID = comments.PostId 
+            LEFT JOIN users as comment_user  ON comment_user.ID = comments.UserId 
             ORDER BY posts.ID";
     $results = mysqli_query($connection, $sql);
     
@@ -20,13 +21,18 @@
                 'Post_id' => $row['Post_id'],
                 'Title' => $row['Title'],
                 'Body' => $row['Body'],
-                'Name' => $row['Name'],
+                'Name' => $row['PostUserName'],
                 'comments' => array()
             );
         }
 
         if (!empty($row['Description'])) {
-            $posts[$post_id]['comments'][] = $row['Description'];
+            // $posts[$post_id]['comments'][] = $row['Description'];
+            $posts[$post_id]['comments'][] = array(
+                'Description' => $row['Description'],
+                'UserName' => $row['CommentUser'],
+                'CommentId' => $row['comment_id']
+            );
         }
 
         $_SESSION['posts'] = $posts;

@@ -54,6 +54,7 @@
                 ?>
 
                 <button type="submit" class="btn btn-info" name="finaledit">Edit</button>
+                <a class="btn btn-primary" href="allposts.php">Cancel</a>
             </form>
           <br>
         </div>
